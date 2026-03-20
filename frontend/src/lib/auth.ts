@@ -32,6 +32,8 @@ const trustedOrigins = Array.from(
 );
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL || (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000"),
+  secret: process.env.BETTER_AUTH_SECRET || "fallback_secret_for_build_only",
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
